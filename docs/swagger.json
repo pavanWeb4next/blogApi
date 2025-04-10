@@ -6,7 +6,7 @@
         "contact": {},
         "version": "1.0"
     },
-    "host": "localhost:3000",
+    "host": "blog-api.onrender.com",
     "basePath": "/",
     "paths": {
         "/api/blog-post": {
@@ -204,7 +204,7 @@
             "properties": {
                 "body": {
                     "type": "string",
-                    "example": "This is a blog body"
+                    "example": "personal details"
                 },
                 "created_at": {
                     "type": "string",
@@ -212,7 +212,7 @@
                 },
                 "description": {
                     "type": "string",
-                    "example": "Getting started with Go-Fiber"
+                    "example": "my personal blog"
                 },
                 "id": {
                     "type": "integer",
@@ -220,7 +220,7 @@
                 },
                 "title": {
                     "type": "string",
-                    "example": "Hello Fiber"
+                    "example": "new blog"
                 },
                 "updated_at": {
                     "type": "string",

@@ -210,7 +210,7 @@ const docTemplate = `{
             "properties": {
                 "body": {
                     "type": "string",
-                    "example": "This is a blog body"
+                    "example": "personal details"
                 },
                 "created_at": {
                     "type": "string",
@@ -218,7 +218,7 @@ const docTemplate = `{
                 },
                 "description": {
                     "type": "string",
-                    "example": "Getting started with Go-Fiber"
+                    "example": "my personal blog"
                 },
                 "id": {
                     "type": "integer",
@@ -226,7 +226,7 @@ const docTemplate = `{
                 },
                 "title": {
                     "type": "string",
-                    "example": "Hello Fiber"
+                    "example": "new blog"
                 },
                 "updated_at": {
                     "type": "string",
@@ -240,7 +240,7 @@ const docTemplate = `{
 // SwaggerInfo holds exported Swagger Info so clients can modify it
 var SwaggerInfo = &swag.Spec{
 	Version:          "1.0",
-	Host:             "localhost:3000",
+	Host:             "blog-api.onrender.com",
 	BasePath:         "/",
 	Schemes:          []string{},
 	Title:            "Blog API",

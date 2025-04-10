@@ -3,25 +3,25 @@ definitions:
   models.BlogPost:
     properties:
       body:
-        example: This is a blog body
+        example: personal details
         type: string
       created_at:
         example: "2025-04-11T01:15:30.123Z"
         type: string
       description:
-        example: Getting started with Go-Fiber
+        example: my personal blog
         type: string
       id:
         example: 1
         type: integer
       title:
-        example: Hello Fiber
+        example: new blog
         type: string
       updated_at:
         example: "2025-04-11T01:20:45.456Z"
         type: string
     type: object
-host: localhost:3000
+host: blog-api.onrender.com
 info:
   contact: {}
   description: CRUD Blog API with Go-Fiber
