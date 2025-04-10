@@ -242,11 +242,12 @@ var SwaggerInfo = &swag.Spec{
 	Version:          "1.0",
 	Host:             "blog-api.onrender.com",
 	BasePath:         "/",
-	Schemes:          []string{},
+	Schemes:          []string{"https"},
 	Title:            "Blog API",
 	Description:      "CRUD Blog API with Go-Fiber",
 	InfoInstanceName: "swagger",
 	SwaggerTemplate:  docTemplate,
+
 }
 
 func init() {

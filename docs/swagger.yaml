@@ -153,4 +153,6 @@ paths:
       summary: Update a blog post
       tags:
       - Blog
+schemes:
+- https
 swagger: "2.0"

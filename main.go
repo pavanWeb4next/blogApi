@@ -15,12 +15,14 @@ import (
 // @description CRUD Blog API with Go-Fiber
 // @host blog-api.onrender.com
 // @BasePath /
+// @schemes https
 func main() {
 	app := fiber.New()
 
+	app.Use(cors.New())
+
 	database.Connect()
 	routes.Setup(app)
-	app.Use(cors.New())
 
 	app.Get("/swagger/*", fiberSwagger.WrapHandler)
 
