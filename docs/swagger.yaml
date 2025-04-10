@@ -1,0 +1,156 @@
+basePath: /
+definitions:
+  models.BlogPost:
+    properties:
+      body:
+        example: This is a blog body
+        type: string
+      created_at:
+        example: "2025-04-11T01:15:30.123Z"
+        type: string
+      description:
+        example: Getting started with Go-Fiber
+        type: string
+      id:
+        example: 1
+        type: integer
+      title:
+        example: Hello Fiber
+        type: string
+      updated_at:
+        example: "2025-04-11T01:20:45.456Z"
+        type: string
+    type: object
+host: localhost:3000
+info:
+  contact: {}
+  description: CRUD Blog API with Go-Fiber
+  title: Blog API
+  version: "1.0"
+paths:
+  /api/blog-post:
+    get:
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.BlogPost'
+            type: array
+        "404":
+          description: Not Found
+          schema:
+            additionalProperties: true
+            type: object
+      summary: Get all blog posts
+      tags:
+      - Blog
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: Blog Post
+        in: body
+        name: blog
+        required: true
+        schema:
+          $ref: '#/definitions/models.BlogPost'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/models.BlogPost'
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties: true
+            type: object
+      summary: Create a blog post
+      tags:
+      - Blog
+  /api/blog-post/{id}:
+    delete:
+      parameters:
+      - description: Blog ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+        "404":
+          description: Not Found
+          schema:
+            additionalProperties: true
+            type: object
+      summary: Delete a blog post
+      tags:
+      - Blog
+    get:
+      parameters:
+      - description: Blog ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.BlogPost'
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties: true
+            type: object
+        "404":
+          description: Not Found
+          schema:
+            additionalProperties: true
+            type: object
+      summary: Get a single blog post by ID
+      tags:
+      - Blog
+    patch:
+      consumes:
+      - application/json
+      parameters:
+      - description: Blog ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Blog Post
+        in: body
+        name: blog
+        required: true
+        schema:
+          $ref: '#/definitions/models.BlogPost'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.BlogPost'
+        "404":
+          description: Not Found
+          schema:
+            additionalProperties: true
+            type: object
+      summary: Update a blog post
+      tags:
+      - Blog
+swagger: "2.0"
