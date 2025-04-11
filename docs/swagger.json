@@ -9,7 +9,6 @@
         "contact": {},
         "version": "1.0"
     },
-    "host": "blog-api.onrender.com",
     "basePath": "/",
     "paths": {
         "/api/blog-post": {

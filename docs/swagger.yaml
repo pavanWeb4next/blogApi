@@ -21,7 +21,6 @@ definitions:
         example: "2025-04-11T01:20:45.456Z"
         type: string
     type: object
-host: blog-api.onrender.com
 info:
   contact: {}
   description: CRUD Blog API with Go-Fiber

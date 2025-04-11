@@ -13,7 +13,7 @@ import (
 // @title Blog API
 // @version 1.0
 // @description CRUD Blog API with Go-Fiber
-// @host blog-api.onrender.com
+// @host
 // @BasePath /
 // @schemes https
 func main() {
