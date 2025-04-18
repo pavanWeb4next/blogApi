@@ -3,6 +3,7 @@ package handlers
 import (
 	"blog-api/database"
 	"blog-api/models"
+	"time"
 
 	"github.com/gofiber/fiber/v2"
 	"gorm.io/gorm"
@@ -12,15 +13,24 @@ import (
 // @Tags Blog
 // @Accept json
 // @Produce json
-// @Param blog body models.BlogPost true "Blog Post"
+// @Param blog body models.BlogPostInput true "Blog Post"
 // @Success 201 {object} models.BlogPost
 // @Failure 400 {object} map[string]interface{}
 // @Router /api/blog-post [post]
 func CreateBlog(c *fiber.Ctx) error {
-	blog := new(models.BlogPost)
-	if err := c.BodyParser(blog); err != nil {
+	var input models.BlogPostInput
+	if err := c.BodyParser(&input); err != nil {
 		return c.Status(400).JSON(fiber.Map{"error": "Invalid input"})
 	}
+
+	blog := models.BlogPost{
+		Title:       input.Title,
+		Description: input.Description,
+		Body:        input.Body,
+		CreatedAt:   time.Now(),
+		UpdatedAt:   time.Now(),
+	}
+
 	database.DB.Create(&blog)
 	return c.Status(201).JSON(blog)
 }
@@ -44,7 +54,6 @@ func GetBlogs(c *fiber.Ctx) error {
 // @Success 200 {object} models.BlogPost
 // @Failure 400 {object} map[string]interface{}
 // @Failure 404 {object} map[string]interface{}
-// @Failure 404 {object} map[string]interface{}
 // @Router /api/blog-post/{id} [get]
 func GetBlog(c *fiber.Ctx) error {
 	id := c.Params("id")
@@ -61,8 +70,9 @@ func GetBlog(c *fiber.Ctx) error {
 // @Accept json
 // @Produce json
 // @Param id path int true "Blog ID"
-// @Param blog body models.BlogPost true "Blog Post"
+// @Param blog body models.BlogPostInput true "Blog Post"
 // @Success 200 {object} models.BlogPost
+// @Failure 400 {object} map[string]interface{}
 // @Failure 404 {object} map[string]interface{}
 // @Router /api/blog-post/{id} [patch]
 func UpdateBlog(c *fiber.Ctx) error {
@@ -73,12 +83,17 @@ func UpdateBlog(c *fiber.Ctx) error {
 		return c.Status(404).JSON(fiber.Map{"error": "Blog not found"})
 	}
 
-	updateData := new(models.BlogPost)
-	if err := c.BodyParser(updateData); err != nil {
+	var input models.BlogPostInput
+	if err := c.BodyParser(&input); err != nil {
 		return c.Status(400).JSON(fiber.Map{"error": "Invalid input"})
 	}
 
-	database.DB.Model(&blog).Updates(updateData)
+	blog.Title = input.Title
+	blog.Description = input.Description
+	blog.Body = input.Body
+	blog.UpdatedAt = time.Now()
+
+	database.DB.Save(&blog)
 	return c.JSON(blog)
 }
 
