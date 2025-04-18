@@ -1,0 +1,8 @@
+{
+    "db_type": "sqlite",
+    "postgres_dsn": "host=localhost user=postgres password=postgres dbname=postgres port=5432 sslmode=disable",
+    "sqlite_path": "blog.db",
+    "mongodb_uri": "mongodb://localhost:27017",
+    "mongodb_db": "blogdb",
+    "use_memcache": true
+  }

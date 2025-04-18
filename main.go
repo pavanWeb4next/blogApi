@@ -1,9 +1,11 @@
 package main
 
 import (
-	"blog-api/database"
 	_ "blog-api/docs" // for Swagger
-	"blog-api/routes"
+	"blog-api/pkg/config"
+	"blog-api/pkg/database"
+	"blog-api/pkg/routes"
+	"fmt"
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/cors"
@@ -17,6 +19,8 @@ import (
 // @BasePath /
 // @schemes https
 func main() {
+	config.LoadConfig()
+	fmt.Println("Using DB:", config.AppConfig.DBType)
 	app := fiber.New()
 
 	app.Use(cors.New(cors.Config{

@@ -1,8 +1,8 @@
 package handlers
 
 import (
-	"blog-api/database"
 	"blog-api/models"
+	"blog-api/pkg/database"
 	"time"
 
 	"github.com/gofiber/fiber/v2"
@@ -83,16 +83,23 @@ func UpdateBlog(c *fiber.Ctx) error {
 		return c.Status(404).JSON(fiber.Map{"error": "Blog not found"})
 	}
 
-	var input models.BlogPostInput
-	if err := c.BodyParser(&input); err != nil {
+	var updateData map[string]interface{}
+	if err := c.BodyParser(&updateData); err != nil {
 		return c.Status(400).JSON(fiber.Map{"error": "Invalid input"})
 	}
 
-	blog.Title = input.Title
-	blog.Description = input.Description
-	blog.Body = input.Body
-	blog.UpdatedAt = time.Now()
+	// Only update non-empty fields
+	if title, ok := updateData["title"].(string); ok && title != "" {
+		blog.Title = title
+	}
+	if desc, ok := updateData["description"].(string); ok && desc != "" {
+		blog.Description = desc
+	}
+	if body, ok := updateData["body"].(string); ok && body != "" {
+		blog.Body = body
+	}
 
+	blog.UpdatedAt = time.Now()
 	database.DB.Save(&blog)
 	return c.JSON(blog)
 }
